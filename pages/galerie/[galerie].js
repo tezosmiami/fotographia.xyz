@@ -54,7 +54,7 @@ export const getStaticPaths = async() => {
     const paths = fotographos.map(f => {
       return {
           params: {
-          perfile: `${f.name || f.address}`,
+          galerie: `${f.name || f.address}`,
         }
       }
     })

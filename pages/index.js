@@ -11,7 +11,7 @@ export const getStaticProps = async() => {
 
   const queryObjkts = `
     query ObjktsByTag($tag: String!) {
-     hic_et_nunc_token(where: {supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, limit: 188)  {
+     hic_et_nunc_token(where: {supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, limit: 888)  {
       id
       artifact_uri
       display_uri

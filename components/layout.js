@@ -59,16 +59,18 @@ export const Layout = ({children}) => {
         {!app.activeAccount ? "sync" : "unsync"}
       </button>  
     </header>  
-
     <p>
-    <a className= 'bold' onClick={() => router.push('/')}>fotographia.xyz</a>
+    <a className= 'bold' onClick={() => router.push('/')}>foto∙graphia.xyz</a>
     </p>
-    <LightButton/>
+    <LightButton/>  
     {/* <Link href='/deal'>(=*\/*=)</Link> */}
     {children}
     <footer>
+     <p>
+    <LightButton/>
+    </p>
     <div>
-    experimental dApp - use at your own risk! 
+    experimental dApp - enjoy! - and use at your own risk. . . 
     </div>
     </footer>
     

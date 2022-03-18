@@ -81,12 +81,13 @@ export default function Home({ fotos }) {
   <p></p>
     <div className='container'>
     {fotos.map(item => (
-      <Link key={item.id} href={`/foto/${item.id}`} token={`https://cloudflare-ipfs.com/ipfs/${item.artifact_uri.slice(7)}`} passHref>
+      <Link key={item.id} href={`/foto/${item.id}`} passHref>
         <div className='pop'>
       <Image 
         alt=""
         height={270}
         width={180}
+        objectFit='cover'
         key={item.id}
         src={'https://cloudflare-ipfs.com/ipfs/' + item.artifact_uri.slice(7)}>
        </Image>

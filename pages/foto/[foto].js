@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { usePassengerContext } from "../../context/passenger-context";
 import Link from 'next/link'
 
@@ -143,13 +143,14 @@ return(
         <link rel="icon" href="/tezosmiami.ico" />
       </Head>
     <div className='cardcontainer'>
-
+        <div className='imagecontainer'>
         <Image 
-        alt=""
-        width={400}
-        height={600}
+        alt=''
+        layout='fill'
+        objectFit='contain'
         src={'https://cloudflare-ipfs.com/ipfs/' + card.artifact_uri.slice(7)}>
         </Image>
+        </div>
         <p></p>
         <a href={`https://hicetnunc.miami/objkt/${card.id}`} target="blank" className='bold' rel="noopener noreferrer">
     {card.title}

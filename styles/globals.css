@@ -93,7 +93,7 @@ footer{
 
 li{
   list-style-type: none;
-  text-align: center;
+  text-align: justify;
 }
 .pop{
   flex-direction: row;
@@ -105,13 +105,17 @@ li{
   transform: scale( 1.02)
 }
 .cardcontainer{
- 
+  width: 90vw;
   margin:18px;
   display: flex;
   justify-content: space-around;
   
 }
+.imagecontainer{
+  position:relative;
+  height: 72vw;
+  max-width: 93vw;
+}
 .slicedcontainer{
   width:33%;
-
 }

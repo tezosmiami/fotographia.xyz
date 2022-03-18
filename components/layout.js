@@ -1,5 +1,4 @@
 import Head from 'next/head'
-
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { usePassengerContext } from "../context/passenger-context";
@@ -52,8 +51,8 @@ export const Layout = ({children}) => {
   return (
     <>
     <header>
-    <Link key={app.address} href={`/perfile/${app.address}`} passHref>
-      {name  || app.activeAccount && app.address.substr(0, 5) + "..." + app.address.substr(-5)}
+    <Link key={app.address} href={`/galerie/${name || app.address}`} passHref>
+      {name || app.activeAccount && app.address.substr(0, 5) + "..." + app.address.substr(-5)}
       </Link>
   
       <button onClick={() => !app.activeAccount ? app.logIn() : app.logOut()}> 

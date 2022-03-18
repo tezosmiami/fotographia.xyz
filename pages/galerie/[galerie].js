@@ -92,7 +92,7 @@ query query_address($address: String!, $tag: String!) {
 
   const getAddress = async () => {
 
-    const { errors, data } = await fetchGraphQL(querySubjkt, 'query_name', { name: params.perfile })
+    const { errors, data } = await fetchGraphQL(querySubjkt, 'query_name', { name: params.galerie })
     if (errors) {
       console.error(errors)
     }
@@ -101,7 +101,7 @@ query query_address($address: String!, $tag: String!) {
 
   }
     
-    const address = params.perfile.length == 36 ? params.perfile : await getAddress();
+    const address = params.galerie.length == 36 ? params.galerie : await getAddress();
    
     const { errors, data } = await fetchGraphQL(objktsByAddress, 'query_address', { address: address, tag: 'photography' })
     if (errors) {
@@ -119,7 +119,7 @@ query query_address($address: String!, $tag: String!) {
 };
 
 
-export default function Perfile({ fotos }) {
+export default function Galerie({ fotos }) {
     
   return (
     <>

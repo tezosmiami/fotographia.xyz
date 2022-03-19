@@ -68,7 +68,7 @@ export const getStaticProps = async({ params }) => {
 
   const objktsByAddress = `
 query query_address($address: String!, $tag: String!) {
-  hic_et_nunc_token(where: {creator: {address: {_eq: $address}, tokens: {token_tags: {tag: {tag: {_eq: $tag}}, token: {supply: {_neq: "0"}}}}}}) {
+  hic_et_nunc_token(where: {creator: {address: {_eq: $address}, tokens: {token_tags: {tag: {tag: {_eq: $tag}}, token: {supply: {_neq: "0"}}}}}}, order_by: {id: desc}) {
     artifact_uri
     display_uri
     id

@@ -75,7 +75,7 @@ export const getStaticProps = async({params}) => {
         token_holders{
          holder_id
         }
-        swaps {
+        swaps (where: {contract_version: {_eq: "2"}}){
           amount
           price
           status

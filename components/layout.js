@@ -66,9 +66,9 @@ export const Layout = ({children}) => {
     {/* <Link href='/deal'>(=*\/*=)</Link> */}
     {children}
     <footer>
-     <p>
+    <p></p>
     <LightButton/>
-    </p>
+    <p></p>
     <div>
     experimental dApp - enjoy! - and use at your own risk. . . 
     </div>

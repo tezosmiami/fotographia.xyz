@@ -29,8 +29,11 @@ export const getStaticPaths = async() => {
  
   const queryObjkts = `
     query Objkts($tag: String!) {
-     hic_et_nunc_token(where: {supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}})  {
+     hic_et_nunc_token(where: {mime: {_neq: "video/mp4"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}})  {
       id
+      creator{
+        address
+      }
        }
    }
    `;
@@ -42,8 +45,8 @@ export const getStaticPaths = async() => {
     }
 
     const axios = require('axios');
-    const response = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/o.json');
-    const fotos = data.hic_et_nunc_token.filter(f => !response.data.includes(f.id));
+    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
+    const fotos = data.hic_et_nunc_token.filter(f => !banned.data.includes(f.creator.address));
     const paths = fotos.map(f => {
       return {
           params: {
@@ -58,7 +61,7 @@ export const getStaticPaths = async() => {
   };
 };
 
-export const getStaticProps = async({params}) => {
+export const getStaticProps = async({ params }) => {
   const queryObjktsbyId = `
       query ObjktsbyId($Id: bigint!) {
       hic_et_nunc_token(where: {id: {_eq: $Id}}) {
@@ -91,7 +94,7 @@ export const getStaticProps = async({params}) => {
     var ownedBy = (card.token_holders[card.token_holders.length-1].holder_id);
     const swaps = card.swaps[card.swaps.length-1] || null;
     const supply= card.supply;
-
+  
   return {
       props: { card, supply, swaps },
   };
@@ -157,7 +160,7 @@ return(
         </div>
         <p></p>
        
-    <a className='bold'>{card.title}</a>
+    <div className='bold'>{card.title}</div>
     <Link key={card.address} href={`/galerie/${card.creator.name || card.creator.address}`} passHref>
     <p>
     by:  <a> {card.creator.name || card.creator.address}

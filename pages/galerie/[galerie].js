@@ -27,7 +27,7 @@ async function fetchGraphQL(queryObjkts, name, variables) {
 export const getStaticPaths = async() => {
  
   const queryFotographos = `
-  query fotographos($tag: String!) {
+  query fotographos ($tag: String!) {
   hic_et_nunc_tag(where: {tag: {_eq: $tag}}) {
     tag_tokens(where: {token: {supply: {_neq: "0"}}}) {
       token {
@@ -44,16 +44,16 @@ export const getStaticPaths = async() => {
     if (errors) {
       console.error(errors)
     }
+
     const axios = require('axios');
-    const response = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
-    const fotographos = data.hic_et_nunc_tag.filter(i => !response.data.includes(i.address));
-    // console.log(data.hic_et_nunc_tag.length)
-    // console.log(fotographos.length)
-    
+    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
+    const fotographos = data.hic_et_nunc_tag[0].tag_tokens.filter(i => !banned.data.includes(i.token.creator.address));
+
     const paths = fotographos.map(f => {
       return {
           params: {
           galerie: `${f.name || f.address}`,
+          // banned: response.data
         }
       }
     })
@@ -69,10 +69,14 @@ export const getStaticProps = async({ params }) => {
 
   const objktsByAddress = `
 query query_address($address: String!, $tag: String!) {
-  hic_et_nunc_token(where: {creator: {address: {_eq: $address}, tokens: {token_tags: {tag: {tag: {_eq: $tag}}, token: {supply: {_neq: "0"}}}}}}, order_by: {id: desc}) {
+  hic_et_nunc_token(where: {creator: {address: {_eq: $address}, tokens: {mime: {_neq: "video/mp4"}, token_tags: {tag: {tag: {_eq: $tag}}}}}, supply: {_neq: "0"}}, order_by: {id: desc}) {
     artifact_uri
     display_uri
     id
+    creator{
+      address
+      name
+    }
   }
 }
 `
@@ -108,9 +112,9 @@ query query_address($address: String!, $tag: String!) {
     }
 
     const axios = require('axios');
-    const response = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/o.json');
-    const fotos = data.hic_et_nunc_token.filter(i => !response.data.includes(i.id));
-  
+    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
+    const fotos = data.hic_et_nunc_token.filter(i => !banned.data.includes(i.address));
+    if (banned.data.includes(address)) {return {notFound: true}}
     
   return {
       props: { fotos },
@@ -132,17 +136,18 @@ export default function Galerie({ fotos }) {
         <meta name="twitter:title" content="fotographia.xyz"/>
         <meta name="twitter:image" content="/tezos512.png" />
       </Head>
-  <p></p>
+      <p><a href={`https://tzkt.io/${fotos[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
+      {fotos[0]?.creator.name || fotos[0]?.creator.address}</a></p>
     <div className='container'>
-    {fotos.map(item => (
-      <Link key={item.id} href={`/foto/${item.id}`} token={`https://cloudflare-ipfs.com/ipfs/${item.artifact_uri.slice(7)}`} passHref>
+    {fotos.map(f => (
+      <Link key={f.id} href={`/foto/${f.id}`} token={`https://cloudflare-ipfs.com/ipfs/${f.artifact_uri.slice(7)}`} passHref>
         <div className='pop'>
       <Image 
         alt=""
         height={270}
         width={180}
-        key={item.id}
-        src={'https://cloudflare-ipfs.com/ipfs/' + item.artifact_uri.slice(7)}>
+        key={f.id}
+        src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}>
        </Image>
       </div>
       </Link>

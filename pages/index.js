@@ -11,7 +11,7 @@ export const getStaticProps = async() => {
 
   const queryObjkts = `
     query ObjktsByTag($tag: String!) {
-     hic_et_nunc_token(where: {mime: {_neq: "video/mp4"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc})  {
+     hic_et_nunc_token(where: {mime: {_neq: "image/gif"}, _and: {mime: {_neq: "video/mp4"}}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc})  {
       id
       artifact_uri
       display_uri
@@ -46,12 +46,10 @@ export const getStaticProps = async() => {
     if (errors) {
       console.error(errors)
     }
-    console.log(data.hic_et_nunc_token.length)
+
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
     const fotos = data.hic_et_nunc_token.filter((i) => !banned.data.includes(i.creator.address))
-    console.log(fotos.length)
-    console.log(banned.data.length)
 
     return {
       props: { fotos },
@@ -96,12 +94,16 @@ export default function Home({ fotos }) {
       <Link key={f.id} href={`/foto/${f.id}`} passHref>
         <div className='pop'>
       <Image
-        alt=""
+        alt="foto∙graphia.xyz"
+        // placeholder='blur'
+        // quality={30}
         height={270}
         width={180}
         objectFit='cover'
         key={f.id}
-        src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}>
+        src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}
+        // blurDataURL={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}
+        >
        </Image>
       </div>
       </Link>

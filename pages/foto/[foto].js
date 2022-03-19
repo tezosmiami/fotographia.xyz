@@ -161,7 +161,7 @@ return(
         <p></p>
        
     <div className='bold'>{card.title}</div>
-    <Link key={card.address} href={`/galerie/${card.creator.name || card.creator.address}`} passHref>
+    <Link key={card.address} href={`/g/${card.creator.name || card.creator.address}`} passHref>
     <p>
     by:  <a> {card.creator.name || card.creator.address}
     </a>

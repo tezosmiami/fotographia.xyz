@@ -51,7 +51,7 @@ export const Layout = ({children}) => {
   return (
     <>
     <header>
-    <Link key={app.address} href={`/galerie/${name || app.address}`} passHref>
+    <Link key={app.address} href={`/g/${name || app.address}`} passHref>
       {name || app.activeAccount && app.address.substr(0, 5) + "..." + app.address.substr(-5)}
       </Link>
   

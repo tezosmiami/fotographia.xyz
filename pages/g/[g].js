@@ -52,7 +52,7 @@ export const getStaticPaths = async() => {
     const paths = fotographos.map(f => {
       return {
           params: {
-          galerie: `${f.name || f.address}`,
+          g: `${f.name || f.address}`,
           // banned: response.data
         }
       }
@@ -95,7 +95,7 @@ query query_address($address: String!, $tag: String!) {
 
   const getAddress = async () => {
 
-    const { errors, data } = await fetchGraphQL(querySubjkt, 'query_name', { name: params.galerie })
+    const { errors, data } = await fetchGraphQL(querySubjkt, 'query_name', { name: params.g })
     if (errors) {
       console.error(errors)
     }
@@ -104,7 +104,7 @@ query query_address($address: String!, $tag: String!) {
 
   }
     
-    const address = params.galerie.length == 36 ? params.galerie : await getAddress();
+    const address = params.g.length == 36 ? params.g : await getAddress();
    
     const { errors, data } = await fetchGraphQL(objktsByAddress, 'query_address', { address: address, tag: 'photography' })
     if (errors) {

@@ -54,32 +54,32 @@ export const getStaticProps = async() => {
     }
     const axios = require('axios');
     const response = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/o.json');
-    const filterFotos = shuffleFotos(data.hic_et_nunc_token.filter(i => !response.data.includes(i.id)))
-    const random = Math.floor(Math.random() * filterFotos.length-288)
-    const fotos = filterFotos.slice(random, random+288)
+    const fotos = shuffleFotos(data.hic_et_nunc_token.filter(i => !response.data.includes(i.id)))
   
   return {
       props: { fotos },
-      revalidate: 30
+      revalidate: 120
   };
 };
 
 
 export default function Home({ fotos }) {
-  // const [shuffle,setShuffle] = useState();
+  const [shuffled,setShuffled] = useState();
   const app = usePassengerContext();  
-
-  // useEffect(() => {
-  //    const shuffleFotos = (a) => {
-  //     for (let i = a.length - 1; i > 0; i--) {
-  //       const j = Math.floor(Math.random() * (i + 1));
-  //       [a[i], a[j]] = [a[j], a[i]];
-  //     }
-  //     return a;
-  //    }
-  //    setShuffle(shuffleFotos(fotos)
-  //    )
-  // }, [fotos])
+  const random = Math.floor(Math.random() * fotos.length-288)
+  const slicedFotos = fotos.slice(random, random+288)
+  
+  useEffect(() => {
+     const shuffleFotos = (a) => {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+     }
+     setShuffled(shuffleFotos(slicedFotos)
+     )
+  }, [fotos])
     
   return (
     <>
@@ -95,7 +95,7 @@ export default function Home({ fotos }) {
       </Head>
       <p></p>
     <div className='container'>
-    {fotos.map(item => (
+    {shuffled?.map(item => (
       <Link key={item.id} href={`/foto/${item.id}`} passHref>
         <div className='pop'>
       <Image

@@ -86,14 +86,15 @@ export default function Home({ fotos }) {
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:site" content="@fotographia.xyz"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
-         <meta name="twitter:title" content="fotographia.xyz/>
+        <meta name="twitter:title" content="fotographia.xyz"/>
+        <meta name="twitter:image" content="/tezos512.png" />
       </Head>
       <p></p>
     <div className='container'>
     {fotos.map(item => (
       <Link key={item.id} href={`/foto/${item.id}`} passHref>
         <div className='pop'>
-      <Image 
+      <Image
         alt=""
         height={270}
         width={180}

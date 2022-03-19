@@ -54,7 +54,7 @@ export const getStaticProps = async() => {
     }
     const axios = require('axios');
     const response = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/o.json');
-    const fotos = shuffleFotos(data.hic_et_nunc_token.filter(i => !response.data.includes(i.id)));
+    const fotos = shuffleFotos(data.hic_et_nunc_token.filter(i => !response.data.includes(i.id))).slice(0,288);
   return {
       props: { fotos },
   };

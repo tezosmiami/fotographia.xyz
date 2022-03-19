@@ -11,16 +11,10 @@ export const getStaticProps = async() => {
 
   const queryObjkts = `
     query ObjktsByTag($tag: String!) {
-     hic_et_nunc_token(where: {supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}})  {
+     hic_et_nunc_token(where: {supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc})  {
       id
       artifact_uri
       display_uri
-      mime
-      token_tags {
-        tag {
-          tag
-        }
-      }
       creator {
         address
         name
@@ -40,23 +34,27 @@ export const getStaticProps = async() => {
     return await result.json()
   }
 
-  const shuffleFotos = (a) => {
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
+  // const shuffleFotos = (a) => {
+  //   for (let i = a.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [a[i], a[j]] = [a[j], a[i]];
+  //   }
+  //   return a;
+  // }
 
     const { errors, data } = await fetchGraphQL(queryObjkts, 'ObjktsByTag', { tag: 'photography' })
     if (errors) {
       console.error(errors)
     }
+    // console.log(data.hic_et_nunc_token.length)
     const axios = require('axios');
-    const response = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/o.json');
-    const fotos = shuffleFotos(data.hic_et_nunc_token.filter(i => !response.data.includes(i.id)))
-  
-  return {
+    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/o.json');
+    const fotos = data.hic_et_nunc_token.filter((i) => !banned.data.includes(i))
+    // console.log(banned.data.includes(221965))
+    // console.log(fotos.length)
+    // console.log(banned.data[0])
+
+    return {
       props: { fotos },
       revalidate: 120
   };
@@ -65,10 +63,9 @@ export const getStaticProps = async() => {
 
 export default function Home({ fotos }) {
   const [shuffled,setShuffled] = useState();
-  const app = usePassengerContext();  
   const random = Math.floor(Math.random() * fotos.length-288)
   const slicedFotos = fotos.slice(random, random+288)
-  
+
   useEffect(() => {
      const shuffleFotos = (a) => {
       for (let i = a.length - 1; i > 0; i--) {
@@ -80,7 +77,8 @@ export default function Home({ fotos }) {
      setShuffled(shuffleFotos(slicedFotos)
      )
   }, [fotos])
-    
+   
+  
   return (
     <>
     <Head>
@@ -95,16 +93,16 @@ export default function Home({ fotos }) {
       </Head>
       <p></p>
     <div className='container'>
-    {shuffled?.map(item => (
-      <Link key={item.id} href={`/foto/${item.id}`} passHref>
+    {shuffled?.map(f=> (
+      <Link key={f.id} href={`/foto/${f.id}`} passHref>
         <div className='pop'>
       <Image
         alt=""
         height={270}
         width={180}
         objectFit='cover'
-        key={item.id}
-        src={'https://cloudflare-ipfs.com/ipfs/' + item.artifact_uri.slice(7)}>
+        key={f.id}
+        src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}>
        </Image>
       </div>
       </Link>

@@ -47,7 +47,8 @@ export const getStaticPaths = async() => {
     const axios = require('axios');
     const response = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
     const fotographos = data.hic_et_nunc_tag.filter(i => !response.data.includes(i.address));
-    // .filter((i) => !response.includes(i.id));
+    // console.log(data.hic_et_nunc_tag.length)
+    // console.log(fotographos.length)
     
     const paths = fotographos.map(f => {
       return {

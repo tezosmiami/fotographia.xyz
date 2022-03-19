@@ -44,7 +44,6 @@ export const getStaticPaths = async() => {
     const axios = require('axios');
     const response = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/o.json');
     const fotos = data.hic_et_nunc_token.filter(f => !response.data.includes(f.id));
-    // .filter((i) => !response.includes(i.id));
     const paths = fotos.map(f => {
       return {
           params: {
@@ -75,7 +74,7 @@ export const getStaticProps = async({params}) => {
         token_holders{
          holder_id
         }
-        swaps (where: {contract_version: {_eq: "2"}}){
+        swaps (order_by: {price: desc}, where: {token: {swaps: {status: {_eq: "0"}}}, contract_version: {_eq: "2"}, status: {_eq:"0"}}){
           amount
           price
           status

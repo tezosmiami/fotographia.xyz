@@ -125,6 +125,11 @@ export default function Galerie({ fotos }) {
         <title>fotographia.xyz</title>
         <meta name="description" content="fotographia.xyz" />
         <link rel="icon" href="/tezosmiami.ico" />
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@fotographia.xyz"/>
+        <meta name="twitter:creator" content="@tezosmiami"/>
+        <meta name="twitter:title" content="fotographia.xyz"/>
+        <meta name="twitter:image" content="/tezos512.png" />
       </Head>
   <p></p>
     <div className='container'>

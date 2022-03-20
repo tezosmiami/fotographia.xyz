@@ -94,7 +94,7 @@ export default function Home({ fotos }) {
       <Link key={f.id} href={`/foto/${f.id}`} passHref>
         <div className='pop'>
       <Image
-        alt="foto∙graphia.xyz"
+        alt=""
         // placeholder='blur'
         // quality={30}
         height={270}

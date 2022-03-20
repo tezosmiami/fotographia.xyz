@@ -147,6 +147,7 @@ export default function Galerie({ fotos }) {
         height={270}
         width={180}
         key={f.id}
+        objectFit='cover'
         src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}>
        </Image>
       </div>

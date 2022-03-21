@@ -29,7 +29,7 @@ export const getStaticPaths = async() => {
  
   const queryObjkts = `
     query Objkts($tag: String!) {
-     hic_et_nunc_token(where: {mime: {_neq: "image/gif"}, _and: {mime: {_neq: "video/mp4"}}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}})  {
+     hic_et_nunc_token(where: {supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}})  {
       id
       creator{
         address
@@ -46,11 +46,11 @@ export const getStaticPaths = async() => {
 
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
-    const fotos = data.hic_et_nunc_token.filter(f => !banned.data.includes(f.creator.address));
-    const paths = fotos.map(f => {
+    const gletchard = data.hic_et_nunc_token.filter(g => !banned.data.includes(g.creator.address));
+    const paths = gletchard.map(g => {
       return {
           params: {
-          foto: `${f.id}`
+          gletch: `${g.id}`
         }
       }
     })
@@ -86,7 +86,7 @@ export const getStaticProps = async({ params }) => {
       }
     }`
     
-    const { errors, data } = await fetchGraphQL(queryObjktsbyId, 'ObjktsbyId', { Id: params.foto})
+    const { errors, data } = await fetchGraphQL(queryObjktsbyId, 'ObjktsbyId', { Id: params.gletch})
     if (errors) {
       console.error(errors)
     }
@@ -100,7 +100,7 @@ export const getStaticProps = async({ params }) => {
   };
 };
 
-const Foto = ({ card, supply, swaps }) => { 
+const Gletch = ({ card, supply, swaps }) => { 
 const [message,setMessage] = useState();
 const [name,setName] = useState()
 const app = usePassengerContext();
@@ -140,13 +140,13 @@ const handleCollect = (swapId, xtzAmount) => async() => {
 return(
     <>
       <Head>
-        <title>fotographia.xyz</title>
-        <meta name="description" content="fotographia.xyz" />
+        <title>g̴l̸e̵t̷c̴h̶a̵r̷d̷.̷x̴y̸z̴</title>
+        <meta name="description" content="gletchard.xyz" />
         <link rel="icon" href="/tezosmiami.ico" />
         <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="@fotographia.xyz"/>
+        <meta name="twitter:site" content="@gletchard.xyz"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
-        <meta name="twitter:title" content="fotographia.xyz"/>
+        <meta name="twitter:title" content="gletchard.xyz"/>
         <meta name="twitter:image" content={'https://cloudflare-ipfs.com/ipfs/' + card.artifact_uri.slice(7)} />
       </Head>
     <div className='cardcontainer'>
@@ -168,7 +168,7 @@ return(
     </p>
     </Link>
         <li> {card.description}</li>
-        <p>{supply > 1 ? supply + ' editions' : ' single edition'} -  <a href={`https://hicetnunc.miami/objkt/${card.id}`} target="blank"  rel="noopener noreferrer">objkt#{card.id}</a></p>
+        <p>{supply > 1 ? supply + ' editions' : ' single edition'} -  <a href={`https://hecticnun.xyz/objkt/${card.id}`} target="blank"  rel="noopener noreferrer">objkt#{card.id}</a></p>
         {/* <p>owned by: <a href={`https://hicetnunc.miami/tz/${ownedBy}`} target="blank" rel="noopener noreferrer">{name || ownedBy.substr(0, 5) + "..." + ownedBy.substr(-5) }</a></p> */}
          {supply && swaps?.status==0 ? <a onClick={handleCollect(swaps.id, swaps.price)}>{`collect for ${(swaps.price* 0.000001).toFixed(2)} tez`}</a> : 'not for sale'}
     </div>
@@ -176,4 +176,4 @@ return(
   </>
 )
 }
-export default Foto;
+export default Gletch;

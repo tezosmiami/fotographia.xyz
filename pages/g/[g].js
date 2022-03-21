@@ -26,8 +26,8 @@ async function fetchGraphQL(queryObjkts, name, variables) {
 
 export const getStaticPaths = async() => {
  
-  const queryFotographos = `
-  query fotographos ($tag: String!) {
+  const queryGletchardists = `
+  query gletchardists ($tag: String!) {
   hic_et_nunc_tag(where: {tag: {_eq: $tag}}) {
     tag_tokens(where: {token: {supply: {_neq: "0"}}}) {
       token {
@@ -40,19 +40,19 @@ export const getStaticPaths = async() => {
   }
 }`;
 
-   const { errors, data } = await fetchGraphQL(queryFotographos, 'fotographos', { tag: 'photography' })
+   const { errors, data } = await fetchGraphQL(queryGletchardists, 'gletchardists', { tag: 'glitchard' })
     if (errors) {
       console.error(errors)
     }
 
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
-    const fotographos = data.hic_et_nunc_tag[0].tag_tokens.filter(i => !banned.data.includes(i.token.creator.address));
+    const gletchardists = data.hic_et_nunc_tag[0].tag_tokens.filter(i => !banned.data.includes(i.token.creator.address));
 
-    const paths = fotographos.map(f => {
+    const paths = gletchardists.map(f => {
       return {
           params: {
-          g: `${f.name || f.address}`,
+          g: `${g.name || g.address}`,
           // banned: response.data
         }
       }
@@ -69,7 +69,7 @@ export const getStaticProps = async({ params }) => {
 
   const objktsByAddress = `
 query query_address($address: String!, $tag: String!) {
-  hic_et_nunc_token(where: {mime: {_neq: "image/gif"}, _and: {mime: {_neq: "video/mp4"}, supply: {_neq: "0"}}, creator: {address: {_eq: $address}}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}) {
+  hic_et_nunc_token(where: {mime: {supply: {_neq: "0"}}, creator: {address: {_eq: $address}}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}) {
     artifact_uri
     display_uri
     id
@@ -113,42 +113,42 @@ query query_address($address: String!, $tag: String!) {
 
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
-    const fotos = data.hic_et_nunc_token.filter(i => !banned.data.includes(i.address));
+    const gletches = data.hic_et_nunc_token.filter(i => !banned.data.includes(i.address));
     if (banned.data.includes(address)) {return {notFound: true}}
     
   return {
-      props: { fotos },
+      props: { gletches },
   };
 };
 
 
-export default function Galerie({ fotos }) {
+export default function Galerie({ gletches }) {
     
   return (
     <>
       <Head>
-        <title>fotographia.xyz</title>
-        <meta name="description" content="fotographia.xyz" />
+        <title>g̴l̸e̵t̷c̴h̶a̵r̷d̷.̷x̴y̸z̴</title>
+        <meta name="description" content="gletchard.xyz" />
         <link rel="icon" href="/tezosmiami.ico" />
         <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="@fotographia.xyz"/>
+        <meta name="twitter:site" content="@gletchard.xyz"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
-        <meta name="twitter:title" content="fotographia.xyz"/>
+        <meta name="twitter:title" content="gletchard.xyz"/>
         <meta name="twitter:image" content="/tezos512.png" />
       </Head>
-      <p><a href={`https://tzkt.io/${fotos[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
-      {fotos[0]?.creator.name || fotos[0]?.creator.address}</a></p>
+      <p><a href={`https://tzkt.io/${gletchard[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
+      {gletchard[0]?.creator.name || gletchard[0]?.creator.address}</a></p>
     <div className='container'>
-    {fotos.map(f => (
-      <Link key={f.id} href={`/foto/${f.id}`} token={`https://cloudflare-ipfs.com/ipfs/${f.artifact_uri.slice(7)}`} passHref>
+    {gletchard.map(g => (
+      <Link key={g.id} href={`/gletch/${g.id}`} token={`https://cloudflare-ipfs.com/ipfs/${g.artifact_uri.slice(7)}`} passHref>
         <div className='pop'>
       <Image 
         alt=""
         height={270}
         width={180}
-        key={f.id}
+        key={g.id}
         objectFit='cover'
-        src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}>
+        src={'https://cloudflare-ipfs.com/ipfs/' + g.artifact_uri.slice(7)}>
        </Image>
       </div>
       </Link>

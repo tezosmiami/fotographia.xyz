@@ -40,7 +40,7 @@ export const getStaticPaths = async() => {
   }
 }`;
 
-   const { errors, data } = await fetchGraphQL(queryGletchardists, 'gletchardists', { tag: 'glitchard' })
+   const { errors, data } = await fetchGraphQL(queryGletchardists, 'gletchardists', { tag: 'glitchart' })
     if (errors) {
       console.error(errors)
     }
@@ -52,7 +52,7 @@ export const getStaticPaths = async() => {
     const paths = gletchardists.map(f => {
       return {
           params: {
-          g: `${g.name || g.address}`,
+          g: `${f.name || f.address}`,
           // banned: response.data
         }
       }
@@ -69,7 +69,7 @@ export const getStaticProps = async({ params }) => {
 
   const objktsByAddress = `
 query query_address($address: String!, $tag: String!) {
-  hic_et_nunc_token(where: {mime: {supply: {_neq: "0"}}, creator: {address: {_eq: $address}}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}) {
+  hic_et_nunc_token(where: {supply: {_neq: "0"}, creator: {address: {_eq: $address}, tokens: {token_tags: {tag: {tag: {_eq: $tag}}}}}}, order_by: {id: desc}) {
     artifact_uri
     display_uri
     id
@@ -106,7 +106,7 @@ query query_address($address: String!, $tag: String!) {
     
     const address = params.g.length == 36 ? params.g : await getAddress();
    
-    const { errors, data } = await fetchGraphQL(objktsByAddress, 'query_address', { address: address, tag: 'photography' })
+    const { errors, data } = await fetchGraphQL(objktsByAddress, 'query_address', { address: address, tag: 'glitchart' })
     if (errors) {
       console.error(errors)
     }
@@ -127,7 +127,8 @@ export default function Galerie({ gletches }) {
   return (
     <>
       <Head>
-        <title>g̴l̸e̵t̷c̴h̶a̵r̷d̷.̷x̴y̸z̴</title>
+       
+      <title>g̴l̸e̵t̷c̴h̶a̵r̷d̷.̷x̴y̸z̴</title>
         <meta name="description" content="gletchard.xyz" />
         <link rel="icon" href="/tezosmiami.ico" />
         <meta name="twitter:card" content="summary"/>
@@ -136,10 +137,10 @@ export default function Galerie({ gletches }) {
         <meta name="twitter:title" content="gletchard.xyz"/>
         <meta name="twitter:image" content="/tezos512.png" />
       </Head>
-      <p><a href={`https://tzkt.io/${gletchard[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
-      {gletchard[0]?.creator.name || gletchard[0]?.creator.address}</a></p>
+      <p><a href={`https://tzkt.io/${gletches[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
+      {gletches[0]?.creator.name || gletches[0]?.creator.address}</a></p>
     <div className='container'>
-    {gletchard.map(g => (
+    {gletches.map(g => (
       <Link key={g.id} href={`/gletch/${g.id}`} token={`https://cloudflare-ipfs.com/ipfs/${g.artifact_uri.slice(7)}`} passHref>
         <div className='pop'>
       <Image 
@@ -159,3 +160,4 @@ export default function Galerie({ gletches }) {
   )
 }
 
+    

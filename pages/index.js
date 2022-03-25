@@ -48,7 +48,7 @@ export const getStaticProps = async() => {
     }
 
     const axios = require('axios');
-    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
+    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
     const fotos = data.hic_et_nunc_token.filter((i) => !banned.data.includes(i.creator.address))
 
     return {

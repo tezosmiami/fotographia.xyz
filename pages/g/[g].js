@@ -48,7 +48,6 @@ export const getStaticPaths = async() => {
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
     const fotographos = data.hic_et_nunc_tag[0].tag_tokens.filter(i => !banned.data.includes(i.token.creator.address));
-
     const paths = fotographos.map(f => {
       return {
           params: {
@@ -112,8 +111,8 @@ query query_address($address: String!, $tag: String!) {
     }
 
     const axios = require('axios');
-    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
-    const fotos = data.hic_et_nunc_token.filter(i => !banned.data.includes(i.address));
+    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
+    const fotos = data.hic_et_nunc_token.filter(i => !banned.data.includes(address));
     if (banned.data.includes(address)) {return {notFound: true}}
     
   return {

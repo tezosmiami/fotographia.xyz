@@ -67,17 +67,20 @@ export const getStaticPaths = async() => {
 export const getStaticProps = async({ params }) => {
 
   const objktsByAddress = `
-query query_address($address: String!, $tag: String!) {
-  hic_et_nunc_token(where: {mime: {_neq: "image/gif"}, _and: {mime: {_neq: "video/mp4"}, supply: {_neq: "0"}}, creator: {address: {_eq: $address}}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}) {
-    artifact_uri
-    display_uri
+query query_address ($address: String!) {
+  hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, _and: {mime: {_neq: "image/gif"}}, supply: {_neq: "0"},
+   token_tags: {tag: {tag: {_ilike: "%photo%"}}}, creator: {address: {_eq: $address}}}, order_by: {id: desc}) {
     id
-    creator{
+    mime
+    creator {
       address
       name
     }
+    artifact_uri
   }
 }
+
+
 `
 
    async function fetchGraphQL(queryObjkts, name, variables) {
@@ -105,7 +108,7 @@ query query_address($address: String!, $tag: String!) {
     
     const address = params.g.length == 36 ? params.g : await getAddress();
    
-    const { errors, data } = await fetchGraphQL(objktsByAddress, 'query_address', { address: address, tag: 'photography' })
+    const { errors, data } = await fetchGraphQL(objktsByAddress, 'query_address', { address: address })
     if (errors) {
       console.error(errors)
     }
@@ -113,6 +116,7 @@ query query_address($address: String!, $tag: String!) {
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
     const fotos = data.hic_et_nunc_token.filter(i => !banned.data.includes(address));
+    
     if (banned.data.includes(address)) {return {notFound: true}}
     
   return {

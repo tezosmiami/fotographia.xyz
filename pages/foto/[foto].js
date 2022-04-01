@@ -29,7 +29,7 @@ export const getStaticPaths = async() => {
  
   const queryObjkts = `
     query Objkts($tag: String!) {
-     hic_et_nunc_token(where: {mime: {_neq: "image/gif"}, _and: {mime: {_neq: "video/mp4"}}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}})  {
+     hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}})  {
       id
       creator{
         address
@@ -155,7 +155,7 @@ return(
         <Image 
         alt=''
         layout='fill'
-        objectFit='contain'
+        objectFit='scale-down'
         src={'https://cloudflare-ipfs.com/ipfs/' + card.artifact_uri.slice(7)}>
         </Image>
         </div>

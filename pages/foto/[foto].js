@@ -164,7 +164,7 @@ return(
     <div className='bold'>{card.title}</div>
     <Link key={card.address} href={`/g/${card.creator.name || card.creator.address}`} passHref>
     <p>
-    by:  <a> {card.creator.name || card.creator.address}
+    by:  <a> {card.creator.name || (card.creator.address.substr(0, 5) + "..." + card.creator.address.substr(-5))}
     </a>
     </p>
     </Link>

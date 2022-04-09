@@ -16,7 +16,7 @@ export const getStaticProps = async() => {
       artifact_uri
       creator {
         address
-        name
+
       }
     }
   }`;
@@ -52,16 +52,16 @@ export const getStaticProps = async() => {
 
     return {
       props: { fotos },
-      revalidate: 120
+      revalidate: 60
   };
 };
 
 
 export default function Home({ fotos }) {
   const [shuffled,setShuffled] = useState();
-  const random = Math.floor(Math.random() * fotos.length-288)
-  const slicedFotos = fotos.slice(random, random+288)
-
+  const random = Math.floor(Math.random() * fotos.length-81)
+  const slicedFotos = fotos.slice(random, random+81)
+  
   useEffect(() => {
      const shuffleFotos = (a) => {
       for (let i = a.length - 1; i > 0; i--) {
@@ -70,7 +70,7 @@ export default function Home({ fotos }) {
       }
       return a;
      }
-     setShuffled(shuffleFotos(slicedFotos)
+     setShuffled(shuffleFotos(slicedFotos.concat(fotos.slice(0,26)))
      )
   }, [fotos])
    
@@ -87,8 +87,29 @@ export default function Home({ fotos }) {
         <meta name="twitter:title" content="fotographia.xyz"/>
         <meta name="twitter:image" content="/tezos512.png" />
       </Head>
-      <p></p>
-    <div className='container'>
+     
+      {/* <p>new mints</p>
+  <div className='container'>
+    {fotos?.slice(0,32).map(f=> (
+      <Link key={f.id} href={`/foto/${f.id}`} passHref>
+        <div className='pop'>
+      <Image
+        alt=""
+        height={270}
+        width={180}
+        objectFit='cover'
+        key={f.id}
+        src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}
+        // blurDataURL={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}
+        >
+       </Image>
+      </div>
+      </Link>
+       ))}
+  </div>
+  <p>random fotos</p> */}
+  <p></p>
+  <div className='container'>
     {shuffled?.map(f=> (
       <Link key={f.id} href={`/foto/${f.id}`} passHref>
         <div className='pop'>

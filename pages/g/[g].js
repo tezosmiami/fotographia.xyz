@@ -140,7 +140,7 @@ export default function Galerie({ fotos }) {
         <meta name="twitter:image" content="/tezos512.png" />
       </Head>
       <p><a href={`https://tzkt.io/${fotos[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
-      {fotos[0]?.creator.name || fotos[0]?.creator.address}</a></p>
+      {fotos[0]?.creator.name || fotos[0]?.creator.address.substr(0, 5) + "..." + fotos[0]?.creator.address.substr(-5)}</a></p>
     <div className='container'>
     {fotos.map(f => (
       <Link key={f.id} href={`/foto/${f.id}`} token={`https://cloudflare-ipfs.com/ipfs/${f.artifact_uri.slice(7)}`} passHref>

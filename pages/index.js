@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import {useState, useEffect} from 'react'
-import { usePassengerContext } from "../context/passenger-context";
-
+import { usePassengerContext } from "../context/passenger-context"
 import Link from 'next/link'
-const hicdex ='https://hdapi.teztools.io/v1/graphql'
+``
+const hicdex ='https://api.hicdex.com/v1/graphql'
 
 
 export const getStaticProps = async() => {

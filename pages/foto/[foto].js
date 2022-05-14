@@ -90,6 +90,13 @@ export const getStaticProps = async({ params }) => {
     if (errors) {
       console.error(errors)
     }
+    if(data) {
+      try {
+          a = JSON.parse(data);
+      } catch(e) {
+          alert(e); // error in the above string (in this case, yes)!
+      }
+  }
     const card = data.hic_et_nunc_token[0]
     var ownedBy = (card.token_holders[card.token_holders.length-1].holder_id);
     const swaps = card.swaps[card.swaps.length-1] || null;

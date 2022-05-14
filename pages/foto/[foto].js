@@ -22,15 +22,7 @@ async function fetchGraphQL(queryObjkts, name, variables) {
       operationName: name,
     }),
   })
-  if(result) {
-    try {
-        a = JSON.parse(result);
-        console.log(result)
-    } catch(e) {
-        console.log(e); // error in the above string (in this case, yes)!
-        
-      }
-}
+  console.log(result)
   return await result.json()
 }
 

@@ -73,7 +73,6 @@ export const getStaticProps = async({ params }) => {
         supply
         creator {
           address
-          name
         }
         token_holders{
          holder_id
@@ -136,7 +135,7 @@ const handleCollect = (swapId, xtzAmount) => async() => {
   }, 3200);
 };
  
-
+``
 
 return(
     <>

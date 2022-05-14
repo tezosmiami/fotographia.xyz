@@ -94,7 +94,7 @@ export const getStaticProps = async({ params }) => {
       try {
           a = JSON.parse(data);
       } catch(e) {
-          alert(e); // error in the above string (in this case, yes)!
+         console.log(e); // error in the above string (in this case, yes)!
       }
   }
     const card = data.hic_et_nunc_token[0]

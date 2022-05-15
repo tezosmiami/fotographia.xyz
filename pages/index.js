@@ -13,6 +13,7 @@ export const getServerSideProps = async() => {
     query ObjktsByTag($tag: String!, $offset: Int!) {
      hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_ilike: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
       id
+      display_uri
       artifact_uri
       creator {
         address
@@ -53,7 +54,6 @@ export const getServerSideProps = async() => {
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
     const latestFotos = await getObjkts(0)
-    const lastId = latestFotos[0].id
     const random = Math.floor(Math.random() * 38000)
 
     const randomFotos = await getObjkts(random)
@@ -130,7 +130,7 @@ export default function Home({ fotos }) {
         width={180}
         objectFit='cover'
         key={f.id}
-        src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}
+        src={'https://cloudflare-ipfs.com/ipfs/' + f.display_uri.slice(7)}
         // blurDataURL={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}
         >
        </Image>

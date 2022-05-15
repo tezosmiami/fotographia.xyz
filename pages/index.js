@@ -5,13 +5,13 @@ import { usePassengerContext } from "../context/passenger-context"
 import Link from 'next/link'
 
 const hicdex ='https://api.hicdex.com/v1/graphql'
-
+const teztok ='https://graphiql.teztok.com'
 
 export const getServerSideProps = async() => {
 
   const queryObjkts = `
-    query ObjktsByTag($tag: String!, $offset: Int) {
-     hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
+    query ObjktsByTag($tag: String!, $offset: Int!) {
+     hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_ilike: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
       id
       artifact_uri
       creator {
@@ -43,7 +43,7 @@ export const getServerSideProps = async() => {
 
 
     async function getObjkts(offset) {
-      const { errors, data } = await fetchGraphQL(queryObjkts, 'ObjktsByTag', { tag: 'photography', offset: offset })
+      const { errors, data } = await fetchGraphQL(queryObjkts, 'ObjktsByTag', { tag: '%photo%', offset: offset })
       if (errors) {
         console.error(errors)
        }
@@ -52,10 +52,11 @@ export const getServerSideProps = async() => {
 
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
-  
     const latestFotos = await getObjkts(0)
     const lastId = latestFotos[0].id
-    const randomFotos = await getObjkts(Math.floor(Math.random() * lastId-81))
+    const random = Math.floor(Math.random() * 38000)
+
+    const randomFotos = await getObjkts(random)
     const filtered = randomFotos.slice(0,81).concat(latestFotos.slice(0,26)).filter((i) => !banned.data.includes(i.creator.address))
     const fotos = shuffleFotos(filtered)
     return {

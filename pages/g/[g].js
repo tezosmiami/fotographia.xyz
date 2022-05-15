@@ -69,7 +69,7 @@ export const getServerSideProps = async({ params }) => {
   const objktsByAddress = `
 query query_address ($address: String!) {
   hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, _and: {mime: {_neq: "image/gif"}}, supply: {_neq: "0"},
-   token_tags: {tag: {tag: {_ilike: "%photo%"}}}, creator: {address: {_eq: $address}}}, order_by: {id: desc}) {
+   token_tags: {tag: {tag: {_eq: "photography"}}}, creator: {address: {_eq: $address}}}, order_by: {id: desc}) {
     id
     mime
     creator {

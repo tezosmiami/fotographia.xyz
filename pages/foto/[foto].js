@@ -74,6 +74,7 @@ export const getServerSideProps = async({ params }) => {
         supply
         creator {
           address
+          name
         }
         token_holders{
          holder_id
@@ -93,7 +94,6 @@ export const getServerSideProps = async({ params }) => {
     }
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
-    
     const card = data?.hic_et_nunc_token[0] || null;
     if (!card ||  banned.data.includes(card.creator.address)) return {notFound: true}
     var ownedBy = (card.token_holders[card.token_holders.length-1].holder_id);

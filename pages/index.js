@@ -10,8 +10,8 @@ const hicdex ='https://api.hicdex.com/v1/graphql'
 export const getServerSideProps = async() => {
 
   const queryObjkts = `
-    query ObjktsByTag($tag: String!) {
-     hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc})  {
+    query ObjktsByTag($tag: String!, $offset: Int) {
+     hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
       id
       artifact_uri
       creator {
@@ -32,24 +32,32 @@ export const getServerSideProps = async() => {
     })
     return await result.json()
   }
+    
+    const shuffleFotos = (a) => {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
 
-  // const shuffleFotos = (a) => {
-  //   for (let i = a.length - 1; i > 0; i--) {
-  //     const j = Math.floor(Math.random() * (i + 1));
-  //     [a[i], a[j]] = [a[j], a[i]];
-  //   }
-  //   return a;
-  // }
 
-    const { errors, data } = await fetchGraphQL(queryObjkts, 'ObjktsByTag', { tag: 'photography' })
-    if (errors) {
-      console.error(errors)
+    async function getObjkts(offset) {
+      const { errors, data } = await fetchGraphQL(queryObjkts, 'ObjktsByTag', { tag: 'photography', offset: offset })
+      if (errors) {
+        console.error(errors)
+       }
+       return data.hic_et_nunc_token
     }
 
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
-    const fotos = data.hic_et_nunc_token.filter((i) => !banned.data.includes(i.creator.address))
-
+  
+    const latestFotos = await getObjkts(0)
+    const lastId = latestFotos[0].id
+    const randomFotos = await getObjkts(Math.floor(Math.random() * lastId-81))
+    const filtered = randomFotos.slice(0,81).concat(latestFotos.slice(0,26)).filter((i) => !banned.data.includes(i.creator.address))
+    const fotos = shuffleFotos(filtered)
     return {
       props: { fotos }
       // revalidate: 60
@@ -58,21 +66,21 @@ export const getServerSideProps = async() => {
 
 
 export default function Home({ fotos }) {
-  const [shuffled,setShuffled] = useState();
-  const random = Math.floor(Math.random() * fotos.length-81)
-  const slicedFotos = fotos.slice(random, random+81)
+  // const [shuffled,setShuffled] = useState();
+  // const random = Math.floor(Math.random() * fotos.length-81)
+  // const slicedFotos = fotos.slice(random, random+81)
   
-  useEffect(() => {
-     const shuffleFotos = (a) => {
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
-     }
-     setShuffled(shuffleFotos(slicedFotos.concat(fotos.slice(0,26)))
-     )
-  }, [fotos])
+  // useEffect(() => {
+  //    const shuffleFotos = (a) => {
+  //     for (let i = a.length - 1; i > 0; i--) {
+  //       const j = Math.floor(Math.random() * (i + 1));
+  //       [a[i], a[j]] = [a[j], a[i]];
+  //     }
+  //     return a;
+  //    }
+  //    setShuffled(shuffleFotos(slicedFotos.concat(fotos.slice(0,26)))
+  //    )
+  // }, [fotos])
    
   
   return (
@@ -110,7 +118,7 @@ export default function Home({ fotos }) {
   <p>random fotos</p> */}
   <p></p>
   <div className='container'>
-    {shuffled?.map(f=> (
+    {fotos?.map(f=> (
       <Link key={f.id} href={`/foto/${f.id}`} passHref>
         <div className='pop'>
       <Image

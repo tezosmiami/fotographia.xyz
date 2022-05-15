@@ -24,47 +24,47 @@ async function fetchGraphQL(queryObjkts, name, variables) {
   return await result.json()
 }
 
-export const getStaticPaths = async() => {
+// export const getStaticPaths = async() => {
  
-  const queryFotographos = `
-  query fotographos ($tag: String!) {
-  hic_et_nunc_tag(where: {tag: {_eq: $tag}}) {
-    tag_tokens(where: {token: {supply: {_neq: "0"}}}) {
-      token {
-        creator {
-          address
-          name
-        }
-      }
-    }
-  }
-}`;
+//   const queryFotographos = `
+//   query fotographos ($tag: String!) {
+//   hic_et_nunc_tag(where: {tag: {_eq: $tag}}) {
+//     tag_tokens(where: {token: {supply: {_neq: "0"}}}) {
+//       token {
+//         creator {
+//           address
+//           name
+//         }
+//       }
+//     }
+//   }
+// }`;
 
-   const { errors, data } = await fetchGraphQL(queryFotographos, 'fotographos', { tag: 'photography' })
-    if (errors) {
-      console.error(errors)
-    }
+//    const { errors, data } = await fetchGraphQL(queryFotographos, 'fotographos', { tag: 'photography' })
+//     if (errors) {
+//       console.error(errors)
+//     }
 
-    const axios = require('axios');
-    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
-    const fotographos = data.hic_et_nunc_tag[0].tag_tokens.filter(i => !banned.data.includes(i.token.creator.address));
-    const paths = fotographos.map(f => {
-      return {
-          params: {
-          g: `${f.name || f.address}`,
-          // banned: response.data
-        }
-      }
-    })
+//     const axios = require('axios');
+//     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc/main/filters/w.json');
+//     const fotographos = data.hic_et_nunc_tag[0].tag_tokens.filter(i => !banned.data.includes(i.token.creator.address));
+//     const paths = fotographos.map(f => {
+//       return {
+//           params: {
+//           g: `${f.name || f.address}`,
+//           // banned: response.data
+//         }
+//       }
+//     })
 
-  return {
-      paths,
-      fallback: 'blocking'
-  };
-};
+//   return {
+//       paths,
+//       fallback: 'blocking'
+//   };
+// };
 
 
-export const getStaticProps = async({ params }) => {
+export const getServerSideProps = async({ params }) => {
 
   const objktsByAddress = `
 query query_address ($address: String!) {
@@ -101,7 +101,8 @@ query query_address ($address: String!) {
     if (errors) {
       console.error(errors)
     }
-
+    console.log(data)
+    if (!data.hic_et_nunc_holder[0]) return {notFound: true}
     return data.hic_et_nunc_holder[0].address
 
   }
@@ -112,7 +113,7 @@ query query_address ($address: String!) {
     if (errors) {
       console.error(errors)
     }
-
+    if (!data) return {notFound: true}
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
     const fotos = data.hic_et_nunc_token.filter(i => !banned.data.includes(address));

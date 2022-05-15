@@ -7,7 +7,7 @@ import Link from 'next/link'
 const hicdex ='https://api.hicdex.com/v1/graphql'
 
 
-export const getStaticProps = async() => {
+export const getServerSideProps = async() => {
 
   const queryObjkts = `
     query ObjktsByTag($tag: String!) {
@@ -51,8 +51,8 @@ export const getStaticProps = async() => {
     const fotos = data.hic_et_nunc_token.filter((i) => !banned.data.includes(i.creator.address))
 
     return {
-      props: { fotos },
-      revalidate: 60
+      props: { fotos }
+      // revalidate: 60
   };
 };
 

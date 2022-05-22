@@ -101,7 +101,6 @@ query query_address ($address: String!) {
     if (errors) {
       console.error(errors)
     }
-    console.log(data)
     if (!data.hic_et_nunc_holder[0]) return {notFound: true}
     return data.hic_et_nunc_holder[0].address
 
@@ -152,7 +151,7 @@ export default function Galerie({ fotos }) {
         width={180}
         key={f.id}
         objectFit='cover'
-        src={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}>
+        src={'https://ipfs.io/ipfs/' + f.artifact_uri.slice(7)}>
        </Image>
       </div>
       </Link>

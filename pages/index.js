@@ -130,7 +130,7 @@ export default function Home({ fotos }) {
         width={180}
         objectFit='cover'
         key={f.id}
-        src={'https://cloudflare-ipfs.com/ipfs/' + f.display_uri.slice(7)}
+        src={'https://ipfs.io/ipfs/' + f.display_uri.slice(7)}
         // blurDataURL={'https://cloudflare-ipfs.com/ipfs/' + f.artifact_uri.slice(7)}
         >
        </Image>

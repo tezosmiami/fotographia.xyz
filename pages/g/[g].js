@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import {useState, useEffect} from 'react'
-import { usePassengerContext } from "../context/passenger-context"
 import Masonry from 'react-masonry-css'
 import Link from 'next/link'
 

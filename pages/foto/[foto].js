@@ -151,14 +151,14 @@ return(
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fotographia.xyz" />
         <meta property="og:image" content="/fotographia.jpg" />
-        <meta property="og:description" content="hicetnunc foto objkts. . " />
+        <meta property="og:description" content="tezos - hicetnunc foto objkts" />
         <meta name="description" content="fotographia.xyz" />
         <link rel="icon" href="/fotographia.jpg" />
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
-        <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
-        <meta name="twitter:title" content="fotographia"/>
-        <meta name="twitter:image" content={'https://cloudflare-ipfs.com/ipfs/' + card.artifact_uri.slice(7)} />
+        <meta name="twitter:description" content="tezos - hicetnunc foto objkts" />
+        <meta name="twitter:title" content=". . ."/>
+        <meta name="twitter:image" content={`https://cloudflare-ipfs.com/ipfs/${card.artifact_uri.slice(7) ||'QmXDKgmL8t5aezg4XnpvT8gWfevUWhiiKDmGrduJxAHjd6"'}`} />
       </Head>
     <div className='cardcontainer'>
         <div className='imagecontainer'>

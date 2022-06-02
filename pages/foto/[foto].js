@@ -150,6 +150,7 @@ return(
         <link rel="icon" href="/tezosmiami.ico" />
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:site" content="@fotographia.xyz"/>
+        <meta name="twitter:description" content="tezos foto objkts. . ." />
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:title" content="fotographia.xyz"/>
         <meta name="twitter:image" content={'https://cloudflare-ipfs.com/ipfs/' + card.artifact_uri.slice(7)} />

@@ -97,7 +97,6 @@ export default function Home({ fotos }) {
   //    )
   // }, [fotos])
    
-  console.log(searchData)
   return (
     <>
     <Head>
@@ -115,7 +114,7 @@ export default function Home({ fotos }) {
         <meta name="twitter:title" content=". . ."/>
         <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/Qmeqb65UxjDdb56ZADpZu3yg3nVVE5gwGGkXk8ASjSPnyL"/>
      </Head>
-     <Search key={router?.asPath} returnSearch={setSearchData} query={query.search}/>
+     <Search returnSearch={setSearchData} query={query.search}/>
 
     {!query.search && <Masonry
         breakpointCols={breakpointColumns}

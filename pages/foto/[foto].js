@@ -147,7 +147,7 @@ return(
       <Head>
         <title>fotographia.xyz</title>
         <meta name="description" content="hicetnunc foto objkts. ." />
-        <meta property="og:title" content="S1NGULARE" />
+        <meta property="og:title" content="fotographia" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fotographia.xyz" />
         <meta property="og:image" content="/fotographia.jpg" />
@@ -155,10 +155,10 @@ return(
         <meta name="description" content="fotographia.xyz" />
         <link rel="icon" href="/fotographia.jpg" />
         <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="@fotographia.xyz"/>
+        <meta name="twitter:site" content="fotographia.xyz"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
-        <meta name="twitter:title" content="fotographia.xyz"/>
+        <meta name="twitter:title" content="fotographia"/>
         <meta name="twitter:image" content={'https://cloudflare-ipfs.com/ipfs/' + card.artifact_uri.slice(7)} />
       </Head>
     <div className='cardcontainer'>

@@ -132,7 +132,7 @@ export default function Galerie({ fotos }) {
       <Head>
         <title>fotographia.xyz</title>
         <meta name="description" content="hicetnunc foto objkts. ." />
-        <meta property="og:title" content="S1NGULARE" />
+        <meta property="og:title" content="fotographia" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fotographia.xyz" />
         <meta property="og:image" content="/fotographia.jpg" />
@@ -143,7 +143,7 @@ export default function Galerie({ fotos }) {
         <meta name="twitter:site" content="@fotographia.xyz"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
-        <meta name="twitter:title" content="fotographia.xyz"/>
+        <meta name="twitter:title" content="fotographia"/>
         <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/QmQD9CjSQzLyGvw5ZaxaDbGr5mtHtn6wUbn3sHYRCbXsqF"/>
       </Head>
       <p><a href={`https://tzkt.io/${fotos[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">

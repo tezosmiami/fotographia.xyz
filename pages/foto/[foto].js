@@ -66,7 +66,7 @@ async function fetchGraphQL(queryObjkts, name, variables) {
 export const getServerSideProps = async({ params }) => {
   const queryObjktsbyId = `
       query ObjktsbyId($Id: bigint!) {
-      hic_et_nunc_token(where: {id: {_eq: $Id}, token_tags: {tag: {tag: {_ilike: "%photo%"}}}}) {
+      hic_et_nunc_token(where: {mime: {_ilike: "%image%", _neq: "image/gif"}, id: {_eq: $Id}, token_tags: {tag: {tag: {_ilike: "%photo%"}}}}) {
         artifact_uri
         description
         id

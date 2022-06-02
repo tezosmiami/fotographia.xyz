@@ -11,7 +11,7 @@ export const getServerSideProps = async() => {
 
   const queryObjkts = `
     query ObjktsByTag($tag: String!, $offset: Int!) {
-     hic_et_nunc_token(where: {mime: {_ilike: "%image%"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
+     hic_et_nunc_token(where: {mime: {_ilike: "%image%", _neq: "image/gif"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
       id
       display_uri
       artifact_uri

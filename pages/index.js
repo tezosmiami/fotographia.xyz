@@ -92,9 +92,9 @@ export default function Home({ fotos }) {
         <meta property="og:title" content="fotographia" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fotographia.xyz" />
-        <meta property="og:image" content="/fotographia1.jpg" />
+        <meta property="og:image" content="/fotographia7.jpg" />
         <meta property="og:description" content="tezos - hicetnunc foto objkts" />
-        <link rel="icon" href="/fotographia1.jpg" />
+        <link rel="icon" href="/fotographia7.jpg" />
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="tezos - hicetnunc foto objkts" />

@@ -131,14 +131,20 @@ export default function Galerie({ fotos }) {
     <>
       <Head>
         <title>fotographia.xyz</title>
+        <meta name="description" content="hicetnunc foto objkts. ." />
+        <meta property="og:title" content="S1NGULARE" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://fotographia.xyz" />
+        <meta property="og:image" content="/fotographia.jpg" />
+        <meta property="og:description" content="hicetnunc foto objkts. . " />
         <meta name="description" content="fotographia.xyz" />
-        <link rel="icon" href="/tezosmiami.ico" />
+        <link rel="icon" href="/fotographia.jpg" />
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:site" content="@fotographia.xyz"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
-        <meta name="twitter:description" content="tezos foto objkts. . ." />
+        <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
         <meta name="twitter:title" content="fotographia.xyz"/>
-        <meta name="twitter:image" content="/tezos512.png" />
+        <meta name="twitter:image" content="/fotographia.jpg" />
       </Head>
       <p><a href={`https://tzkt.io/${fotos[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
       {fotos[0]?.creator.name || fotos[0]?.creator.address.substr(0, 5) + "..." + fotos[0]?.creator.address.substr(-5)}</a></p>

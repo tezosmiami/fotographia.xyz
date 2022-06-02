@@ -151,7 +151,7 @@ export default function Galerie({ fotos }) {
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="tezos - hicetnunc foto objkts" />
         <meta name="twitter:title" content=". . ."/>
-        <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/QmXUiVbqgi1226uK4eWFpQbarLzvPxMW5Zr2B6sVaaMq1M"/>
+        <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/Qmeqb65UxjDdb56ZADpZu3yg3nVVE5gwGGkXk8ASjSPnyL"/>
       </Head>
       <p><a href={`https://tzkt.io/${fotos[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
       {fotos[0]?.creator.name || fotos[0]?.creator.address.substr(0, 5) + "..." + fotos[0]?.creator.address.substr(-5)}</a></p>

@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import {useState, useEffect} from 'react'
-import { usePassengerContext } from "../context/passenger-context"
+import { useRouter } from 'next/router'
 import Masonry from 'react-masonry-css'
+import Search from '../components/search'
 import Link from 'next/link'
+
 
 const hicdex ='https://api.hicdex.com/v1/graphql'
 const teztok ='https://graphiql.teztok.com'
@@ -65,7 +67,6 @@ export const getServerSideProps = async() => {
     const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
     const latestFotos = await getObjkts(0)
     const random = Math.floor(Math.random() * 38000)
-
     const randomFotos = await getObjkts(random)
     const filtered = randomFotos.slice(0,81).concat(latestFotos.slice(0,26)).filter((i) => !banned.data.includes(i.creator.address))
     const fotos = shuffleFotos(filtered)
@@ -77,6 +78,9 @@ export const getServerSideProps = async() => {
 
 
 export default function Home({ fotos }) {
+  const [searchData,setSearchData] = useState([]);
+  const { query, router }= useRouter();
+
   // const [shuffled,setShuffled] = useState();
   // const random = Math.floor(Math.random() * fotos.length-81)
   // const slicedFotos = fotos.slice(random, random+81)
@@ -93,7 +97,7 @@ export default function Home({ fotos }) {
   //    )
   // }, [fotos])
    
-  
+  console.log(searchData)
   return (
     <>
     <Head>
@@ -111,8 +115,9 @@ export default function Home({ fotos }) {
         <meta name="twitter:title" content=". . ."/>
         <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/Qmeqb65UxjDdb56ZADpZu3yg3nVVE5gwGGkXk8ASjSPnyL"/>
      </Head>
+     <Search key={router?.asPath} returnSearch={setSearchData} query={query.search}/>
 
-  <Masonry
+    {!query.search && <Masonry
         breakpointCols={breakpointColumns}
         className='grid'
         columnClassName='column'>
@@ -121,7 +126,7 @@ export default function Home({ fotos }) {
         <img alt='' className= 'pop' key={f.artifact_uri+f.token_id}  src={`https://ipfs.io/ipfs/${f.display_uri ? f.display_uri?.slice(7) : f.artifact_uri.slice(7)}`}/>
       </Link>
      ))}
-  </Masonry>
+  </Masonry>}
  
    <p></p>  
   </>

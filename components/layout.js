@@ -5,7 +5,7 @@ import { usePassengerContext } from "../context/passenger-context";
 import { LightButton } from './light-button';
 import Link from 'next/link'
 
-const hicdex ='https://hdapi.teztools.io/v1/graphql'
+const hicdex ='https://api.hicdex.com/v1/graphql'
 
 const querySubjkt = `
 query Subjkt($address: String!) {
@@ -42,12 +42,13 @@ export const Layout = ({children}) => {
        if (errors) {
          console.error(errors);
        }
-       data.hic_et_nunc_holder[0] && setName(data.hic_et_nunc_holder[0].name);
+       data?.hic_et_nunc_holder[0] && setName(data?.hic_et_nunc_holder[0].name);
      }
     }
     fetchData()
   }, [app])
 
+ 
   return (
     <>
     <header>

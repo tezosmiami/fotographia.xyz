@@ -136,7 +136,7 @@ li{
   align-items: flex-start;
   flex-direction:row;
   width: 90vw;
-  margin-top:33px;
+  margin-top:8px;
 }
 .column {
 position:relative;
@@ -145,4 +145,23 @@ position:relative;
 }
 .column > * {
   background-clip: padding-box;
+}
+
+.searchbar{
+  border:none;
+  height:21px;
+  width: 108px; 
+  font-family: 'Courier New', Courier, monospace;
+  font-size:16px;
+  color:var(--text);
+  background-color: var(--background);
+}
+input:focus {
+  outline-width: 0;
+}
+
+::-webkit-input-placeholder{
+  color: var(--text);
+  text-indent: 15px;
+  border-bottom: 1px solid black;
 }

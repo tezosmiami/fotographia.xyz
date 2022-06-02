@@ -158,7 +158,7 @@ return(
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="tezos - hicetnunc foto objkts" />
         <meta name="twitter:title" content=". . ."/>
-        <meta name="twitter:image" content={`https://cloudflare-ipfs.com/ipfs/${card.artifact_uri.slice(7) ||'QmXDKgmL8t5aezg4XnpvT8gWfevUWhiiKDmGrduJxAHjd6"'}`} />
+        <meta name="twitter:image" content={`https://cloudflare-ipfs.com/ipfs/${card.artifact_uri.slice(7) ||'QmXUiVbqgi1226uK4eWFpQbarLzvPxMW5Zr2B6sVaaMq1M'}`} />
       </Head>
     <div className='cardcontainer'>
         <div className='imagecontainer'>

@@ -1,9 +1,20 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import {useState, useEffect} from 'react'
+import { usePassengerContext } from "../context/passenger-context"
+import Masonry from 'react-masonry-css'
 import Link from 'next/link'
 
 const hicdex ='https://api.hicdex.com/v1/graphql'
 
+const breakpointColumns = {
+  default: 6,
+  1800: 6,
+  1500: 5,
+  1200: 4,
+  900: 3,
+  600: 2
+};
 const querySubjkt = `
 query query_name ($name: String!) {
   hic_et_nunc_holder(where: {name: {_eq: $name}}) {
@@ -142,26 +153,20 @@ export default function Galerie({ fotos }) {
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="tezos - hicetnunc foto objkts" />
         <meta name="twitter:title" content=". . ."/>
-        <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/QmXDKgmL8t5aezg4XnpvT8gWfevUWhiiKDmGrduJxAHjd6"/>
+        <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/QmXUiVbqgi1226uK4eWFpQbarLzvPxMW5Zr2B6sVaaMq1M"/>
       </Head>
       <p><a href={`https://tzkt.io/${fotos[0]?.creator.address}`} target="blank"  rel="noopener noreferrer">
       {fotos[0]?.creator.name || fotos[0]?.creator.address.substr(0, 5) + "..." + fotos[0]?.creator.address.substr(-5)}</a></p>
-    <div className='container'>
-    {fotos.map(f => (
-      <Link key={f.id} href={`/foto/${f.id}`} token={`https://cloudflare-ipfs.com/ipfs/${f.artifact_uri.slice(7)}`} passHref>
-        <div className='pop'>
-      <Image 
-        alt=""
-        height={270}
-        width={180}
-        key={f.id}
-        objectFit='cover'
-        src={'https://ipfs.io/ipfs/' + f.artifact_uri.slice(7)}>
-       </Image>
-      </div>
+      <Masonry
+        breakpointCols={breakpointColumns}
+        className='grid'
+        columnClassName='column'>
+    {fotos?.map(f=> (
+      <Link key={f.id} className='center' href={`/foto/${f.id}`} passHref>
+        <img alt='' className= 'pop' key={f.artifact_uri+f.token_id}  src={`https://ipfs.io/ipfs/${f.display_uri ? f.display_uri?.slice(7) : f.artifact_uri.slice(7)}`}/>
       </Link>
      ))}
-   </div>
+  </Masonry>
    <p></p>  
   </>
   )

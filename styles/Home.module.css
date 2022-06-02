@@ -114,3 +114,15 @@
     flex-direction: column;
   }
 }
+.pop{
+  /* flex-direction: row;
+  flex-wrap:wrap; */
+  /* height:360px; */
+  width:100%;
+  object-fit: contain;
+  cursor:pointer;
+}
+.pop:hover{
+  transform: scale(1.011);
+  transition-duration: .3s;
+}

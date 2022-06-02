@@ -102,7 +102,7 @@ export default function Home({ fotos }) {
         <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
         <meta name="twitter:title" content="fotographia.xyz"/>
         <meta name="twitter:image" content="/fotographia.jpg" />
-     
+     </Head>
       {/* <p>new mints</p>
   <div className='container'>
     {fotos?.slice(0,32).map(f=> (

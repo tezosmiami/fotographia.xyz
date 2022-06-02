@@ -99,7 +99,7 @@ export default function Home({ fotos }) {
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
         <meta name="twitter:title" content="fotographia"/>
-        <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/QmQD9CjSQzLyGvw5ZaxaDbGr5mtHtn6wUbn3sHYRCbXsqF"/>
+        <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/QmcqQHt9uK7mSyLXAaLjZUCR2rz4A3pFw53N7seZTR7vBL"/>
      </Head>
       {/* <p>new mints</p>
   <div className='container'>

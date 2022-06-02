@@ -150,15 +150,15 @@ return(
         <meta property="og:title" content="fotographia" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fotographia.xyz" />
-        <meta property="og:image" content="/fotographia.jpg" />
+        <meta property="og:image" content="/fotographia3.jpg" />
         <meta property="og:description" content="hicetnunc foto objkts. . " />
         <meta name="description" content="fotographia.xyz" />
-        <link rel="icon" href="/fotographia.jpg" />
+        <link rel="icon" href="/fotographia3.jpg" />
         <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="fotographia.xyz"/>
+        <meta name="twitter:site" content="fotographia"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
-        <meta name="twitter:title" content="fotographia"/>
+        <meta name="twitter:title" content="fotographia.xyz"/>
         <meta name="twitter:image" content={'https://cloudflare-ipfs.com/ipfs/' + card.artifact_uri.slice(7)} />
       </Head>
     <div className='cardcontainer'>

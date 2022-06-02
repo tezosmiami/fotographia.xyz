@@ -92,14 +92,14 @@ export default function Home({ fotos }) {
         <meta property="og:title" content="fotographia" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fotographia.xyz" />
-        <meta property="og:image" content="/fotographia.jpg" />
+        <meta property="og:image" content="/fotographia3.jpg" />
         <meta property="og:description" content="hicetnunc foto objkts. . " />
-        <link rel="icon" href="/fotographia.jpg" />
+        <link rel="icon" href="/fotographia3.jpg" />
         <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="fotographia.xyz"/>
+        <meta name="twitter:site" content="fotographia"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
-        <meta name="twitter:title" content="fotographia"/>
+        <meta name="twitter:title" content="fotographia.xyz"/>
         <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/QmQD9CjSQzLyGvw5ZaxaDbGr5mtHtn6wUbn3sHYRCbXsqF"/>
      </Head>
       {/* <p>new mints</p>

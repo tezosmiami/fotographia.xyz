@@ -155,10 +155,9 @@ return(
         <meta name="description" content="fotographia.xyz" />
         <link rel="icon" href="/fotographia3.jpg" />
         <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="fotographia"/>
         <meta name="twitter:creator" content="@tezosmiami"/>
         <meta name="twitter:description" content="hicetnunc foto objkts. . ." />
-        <meta name="twitter:title" content="fotographia.xyz"/>
+        <meta name="twitter:title" content="fotographia"/>
         <meta name="twitter:image" content={'https://cloudflare-ipfs.com/ipfs/' + card.artifact_uri.slice(7)} />
       </Head>
     <div className='cardcontainer'>

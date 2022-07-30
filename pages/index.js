@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
+import { usePassengerContext } from "../context/passenger-context";
 import Masonry from 'react-masonry-css'
 import Search from '../components/search'
 import Link from 'next/link'

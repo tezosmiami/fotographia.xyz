@@ -7,9 +7,8 @@ const options = {
   name: 'Tezos Miami'
  };
   
-if (process.browser){
+
   const wallet = new BeaconWallet(options);
-}
 
 export const usePassengerContext = () => {
 

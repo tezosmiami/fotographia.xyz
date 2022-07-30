@@ -32,7 +32,7 @@ export const PassengerContextProvider = ({ children }) => {
 
   useEffect( () => {
      const getLoggedIn = async () => {
-        if (await wallet.client.getActiveAccount()) { 
+        if (await wallet?.client.getActiveAccount()) { 
           setActiveAccount(await wallet.client.getActiveAccount());
           const address =  await wallet.getPKH();
           setAddress(address);

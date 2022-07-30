@@ -123,7 +123,7 @@ query query_address ($address: String!) {
     }
     if (!data) return {notFound: true}
     const axios = require('axios');
-    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
+    const banned = await axios.get('https://raw.githubusercontent.com/teia-community/teia-report/main/restricted.json');
     const fotos = data.hic_et_nunc_token.filter(i => !banned.data.includes(address));
     
     if (banned.data.includes(address)) {return {notFound: true}}

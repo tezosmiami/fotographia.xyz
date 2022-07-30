@@ -65,7 +65,7 @@ export const Search = ({ returnSearch, query }) => {
         router.push(`/?search=${search}`, undefined, {shallow: true});
         const result = await request(hicdex,  getSearch, {word: search})
         const axios = require('axios');
-        const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json') ;
+        const banned = await axios.get('https://raw.githubusercontent.com/teia-community/teia-report/main/restricted.json') ;
         const aliases = result.aliases.filter((i) => !banned.data.includes(i.artist_address))
         const tags = result.tags.filter((i) => !banned.data.includes(i.artist_address))
         const tags_artifacts = new Set(tags.map(({ artifact_uri }) => artifact_uri));

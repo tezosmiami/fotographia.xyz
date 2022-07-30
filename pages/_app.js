@@ -5,12 +5,12 @@ import { Layout } from "../components/layout"
 function MyApp({ Component, pageProps }) {
   
   useEffect(() => {
-    if (process.browser){
-    const localLightMode = window?.localStorage.getItem('lightMode');
+    
+    const localLightMode = window.localStorage.getItem('lightMode');
     if(localLightMode === 'true') {
         document.body.classList.add('lightMode');
     }
-}}, []);
+}, []);
 
   return (
   <PassengerContextProvider>

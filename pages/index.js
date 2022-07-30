@@ -21,22 +21,9 @@ const breakpointColumns = {
 
 export const getServerSideProps = async() => {
 
-  // const queryObjkts = `
-  //   query ObjktsByTag($tag: String!, $offset: Int!) {
-  //    hic_et_nunc_token(where: {mime: {_ilike: "%image%", _neq: "image/gif"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
-  //     id
-  //     display_uri
-  //     artifact_uri
-  //     creator {
-  //       address
-
-  //     }
-  //   }
-  // }`;
-
   const queryObjkts = `
     query ObjktsByTag($tag: String!, $offset: Int!) {
-     tokens(where: {mime_type: {_ilike: "%image%", _neq: "image/gif"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {opid: desc}, offset: $offset)  {
+     hic_et_nunc_token(where: {mime: {_ilike: "%image%", _neq: "image/gif"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
       id
       display_uri
       artifact_uri
@@ -77,7 +64,7 @@ export const getServerSideProps = async() => {
     }
 
     const axios = require('axios');
-    const banned = await axios.get('https://raw.githubusercontent.com/teia-community/teia-report/main/restricted.json');
+    const banned = await axios.get('https://raw.githubusercontent.com/hicetnunc2000/hicetnunc-reports/main/filters/w.json');
     const latestFotos = await getObjkts(0)
     const random = Math.floor(Math.random() * 38000)
     const randomFotos = await getObjkts(random)

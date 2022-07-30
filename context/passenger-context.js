@@ -4,7 +4,7 @@ import { BeaconWallet } from "@taquito/beacon-wallet";
 
 const PassengerContext = React.createContext();
 const options = {
-  name: 'Tezos Miami'
+  name: 'foto∙graphia.xyz'
  };
   
 if (process.browser){
@@ -31,6 +31,7 @@ export const PassengerContextProvider = ({ children }) => {
 
 
   useEffect( () => {
+
      const getLoggedIn = async () => {
         if (await wallet?.client.getActiveAccount()) { 
           setActiveAccount(await wallet.client.getActiveAccount());

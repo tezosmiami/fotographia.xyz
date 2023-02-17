@@ -51,6 +51,21 @@ export const Layout = ({children}) => {
  
   return (
     <>
+     <Head>
+        <title>fotographia.xyz</title>
+        <meta name="description" content="tezos - hicetnunc foto objkts. ." />
+        <meta property="og:title" content="fotographia" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://fotographia.xyz" />
+        <meta property="og:image" content="/fotographia7.jpg" />
+        <meta property="og:description" content="tezos - hicetnunc foto objkts" />
+        <link rel="icon" href="/fotographia7.jpg" />
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:creator" content="@tezosmiami"/>
+        <meta name="twitter:description" content="tezos - hicetnunc foto objkts" />
+        <meta name="twitter:title" content=". . ."/>
+        <meta name="twitter:image" content="https://gateway.pinata.cloud/ipfs/Qmeqb65UxjDdb56ZADpZu3yg3nVVE5gwGGkXk8ASjSPnyL"/>
+     </Head>
     <header>
     <Link key={app.address} href={`/g/${name || app.address}`} passHref>
       {name || app.activeAccount && app.address.substr(0, 5) + "..." + app.address.substr(-5)}

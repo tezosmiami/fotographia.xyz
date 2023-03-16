@@ -166,6 +166,7 @@ return(
         alt=''
         layout='fill'
         objectFit='scale-down'
+        unpotimized
         src={'https://ipfs.io/ipfs/' + card.artifact_uri.slice(7)}>
         </Image>
         </div>

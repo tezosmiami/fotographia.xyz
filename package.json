@@ -8,8 +8,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@taquito/beacon-wallet": "^13.0.1",
-    "@taquito/taquito": "^13.0.1",
+    "@taquito/beacon-wallet": "^16.0.0-f11628c--",
+    "@taquito/taquito": "^16.0.0-f11628c--",
     "graphql": "^16.5.0",
     "graphql-request": "^4.3.0",
     "next": "12.1.6",

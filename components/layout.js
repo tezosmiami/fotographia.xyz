@@ -84,7 +84,7 @@ export const Layout = ({children}) => {
     <p></p>
     <LightButton/>
     <p></p>
-    <div>
+    <div style={{fontSize:'23px'}}>
     experimental dApp - enjoy! - and use at your own risk. . . 
     </div>
     </footer>

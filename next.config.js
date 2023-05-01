@@ -8,6 +8,7 @@ module.exports = {
         'gateway.pinata.cloud',
         'ipfs.io',
         'services.tzkt.io',
+        'ipfs.io'
     ],
 },
 }

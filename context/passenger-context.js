@@ -7,9 +7,7 @@ const options = {
   name: 'foto∙graphia.xyz'
  };
   
-if (process.browser){
-  const wallet = new BeaconWallet(options);
-}
+const wallet = typeof window !== 'undefined' ? new BeaconWallet(options) : null
 
 export const usePassengerContext = () => {
 

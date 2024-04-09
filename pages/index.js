@@ -8,8 +8,8 @@ import Search from '../components/search'
 import Link from 'next/link'
 
 
-const hicdex ='https://api.hicdex.com/v1/graphql'
-const teztok ='https://graphiql.teztok.com'
+const hicdex ='https://hicdex.magiccity.live/v1/graphql'
+// const teztok ='https://graphiql.teztok.com'
 
 const breakpointColumns = {
   default: 6,
@@ -24,13 +24,12 @@ export const getServerSideProps = async() => {
 
   const queryObjkts = `
     query ObjktsByTag($tag: String!, $offset: Int!) {
-     hic_et_nunc_token(where: {mime: {_ilike: "%image%", _neq: "image/gif"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}, offset: $offset)  {
+      token(where: {mime: {_ilike: "%image%", _neq: "image/gif"}, supply: {_neq: "0"}, token_tags: {tag: {tag: {_eq: $tag}}}}, order_by: {id: desc}, offset: $offset, limit: 44)  {
       id
       display_uri
       artifact_uri
       creator {
         address
-
       }
     }
   }`;
@@ -61,7 +60,7 @@ export const getServerSideProps = async() => {
       if (errors) {
         console.error(errors)
        }
-       return data.hic_et_nunc_token
+       return data.token
     }
 
     const axios = require('axios');

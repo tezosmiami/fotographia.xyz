@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { usePassengerContext } from "../../context/passenger-context";
 import Link from 'next/link'
 
-const hicdex ='https://api.hicdex.com/v1/graphql'
+const hicdex ='https://hicdex.magiccity.live/v1/graphql'
 
 // const querySubjkt = `
 // query Subjkt($address: String!) {
@@ -66,7 +66,7 @@ async function fetchGraphQL(queryObjkts, name, variables) {
 export const getServerSideProps = async({ params }) => {
   const queryObjktsbyId = `
       query ObjktsbyId($Id: bigint!) {
-      hic_et_nunc_token(where: {mime: {_ilike: "%image%", _neq: "image/gif"}, id: {_eq: $Id}, token_tags: {tag: {tag: {_ilike: "%photo%"}}}}) {
+       token(where: {mime: {_ilike: "%image%", _neq: "image/gif"}, id: {_eq: $Id}, token_tags: {tag: {tag: {_ilike: "%photo%"}}}}) {
         artifact_uri
         description
         id
@@ -94,7 +94,7 @@ export const getServerSideProps = async({ params }) => {
     }
     const axios = require('axios');
     const banned = await axios.get('https://raw.githubusercontent.com/teia-community/teia-report/main/restricted.json');
-    const card = data?.hic_et_nunc_token[0] || null;
+    const card = data?.token[0] || null;
     if (!card ||  banned.data.includes(card.creator.address)) return {notFound: true}
     var ownedBy = (card.token_holders[card.token_holders.length-1].holder_id);
     const swaps = card.swaps[card.swaps.length-1] || null;
@@ -180,8 +180,8 @@ return(
     </p>
     </Link>
         <li> {card.description}</li>
-        <p>{supply > 1 ? supply + ' editions' : ' single edition'} -  <a href={`https://hicetnunc.miami/objkt/${card.id}`} target="blank"  rel="noopener noreferrer">objkt#{card.id}</a></p>
-        {/* <p>owned by: <a href={`https://hicetnunc.miami/tz/${ownedBy}`} target="blank" rel="noopener noreferrer">{name || ownedBy.substr(0, 5) + "..." + ownedBy.substr(-5) }</a></p> */}
+        <p>{supply > 1 ? supply + ' editions' : ' single edition'} -  <a href={`https://magiccity.live/objkt/${card.id}`} target="blank"  rel="noopener noreferrer">objkt#{card.id}</a></p>
+        {/* <p>owned by: <a href={`https://magiccity.live/tz/${ownedBy}`} target="blank" rel="noopener noreferrer">{name || ownedBy.substr(0, 5) + "..." + ownedBy.substr(-5) }</a></p> */}
          {supply && swaps?.status==0 ? <a onClick={handleCollect(swaps.id, swaps.price)}>{`collect for ${(swaps.price* 0.000001).toFixed(2)} tez`}</a> : 'not for sale'}
     </div>
     

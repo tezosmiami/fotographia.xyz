@@ -68,7 +68,7 @@ export const PassengerContextProvider = ({ children }) => {
   async function collect(swapId, xtzAmount) {
     try {
         const v2 = await tezos.wallet.at('KT1HbQepzV1nVGg8QVznG7z4RcHseD5kwqBn');
-        const op = await v2.methods
+        const op = await v2.methodsObject
             .collect(parseFloat(swapId))
             .send({
                 amount: parseFloat(xtzAmount),
